@@ -1,0 +1,14 @@
+{"name":"test3",
+  "version":"v1",
+  "context":"/test3",
+  "policies":["Bronze"],
+  "endpointConfig":{
+    "endpoint_type":"http",
+    "sandbox_endpoints":{
+      "url":"wss://localhost:7777"},
+    "production_endpoints":{
+      "url":"wss://localhost:7777"}
+  },
+  "gatewayEnvironments":["Production and Sandbox"],
+  "type":"WS"
+}

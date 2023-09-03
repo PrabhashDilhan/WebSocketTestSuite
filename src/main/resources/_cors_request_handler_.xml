@@ -1,0 +1,27 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="_cors_request_handler_">
+    <log level="custom">
+        <property name="OriginTest===============1111" expression="get-property('WSOrigin')" />
+    </log>
+    <filter source="boolean($ctx:WSOrigin)" regex="true">
+        <then>
+            <property name="OriginTest" expression="$ctx:WSOrigin" />
+        </then>
+    </filter>
+    <log level="custom">
+        <property name="OriginTest===============222" expression="get-property('OriginTest')" />
+    </log>
+    <switch xmlns:ns="http://org.apache.synapse/xsd" source="get-property('OriginTest')">
+        <case regex="(https):\/\/((wso2.prod))\.london\.(com)$">
+            <log level="custom">
+                <property name="OriginTest===============case Pass" expression="get-property('WSOrigin')" />
+            </log>
+            <property name="WSCORSOriginSuccess" value="true" type="BOOLEAN" />
+        </case>
+        <default>
+            <log level="custom">
+                <property name="OriginTest===============default" expression="get-property('WSOrigin')" />
+            </log>
+            <property name="WSCORSOriginSuccess" value="false" type="BOOLEAN" />
+        </default>
+    </switch>
+</sequence>
