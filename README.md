@@ -43,9 +43,9 @@
   "endpointConfig":{
     "endpoint_type":"http",
     "sandbox_endpoints":{
-      "url":"wss://localhost:7777"},
+      "url":"wss://localhost:7778"},
     "production_endpoints":{
-      "url":"wss://localhost:7777"}
+      "url":"wss://localhost:7778"}
   },
   "gatewayEnvironments":["Production and Sandbox"],
   "type":"WS"

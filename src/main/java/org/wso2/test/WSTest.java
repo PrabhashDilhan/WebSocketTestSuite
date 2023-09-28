@@ -22,7 +22,7 @@ public class WSTest {
 
     public static void main(String[] args){
         
-        String path = args[0];
+        /*String path = args[0];
         Properties prop = new Properties();
         File initialFile = new File(path);
         InputStream inputStream = null;
@@ -45,20 +45,20 @@ public class WSTest {
         String keypassword = prop.getProperty("keypassword");
         String websocketport = prop.getProperty("websocketport");
         String carbonport = prop.getProperty("carbonport");
-        String passthruonport = prop.getProperty("carbonport");
+        String passthruonport = prop.getProperty("passthruonport");
         String firstapipath = prop.getProperty("firstapipath");
         String secondapipath = prop.getProperty("secondapipath");
-        String corshandlerpath = prop.getProperty("corshandlerpath");
+        String corshandlerpath = prop.getProperty("corshandlerpath");*/
 
-/*        String serverhome = "/Users/apple/Documents/support/509_BNY_TESTING/wso2am-3.2.0";
+        String serverhome = "/Users/prabhash/Documents/support/516_TESTS/wso2am-3.2.0";
         String storepassword = "wso2carbon";
         String keypassword = "wso2carbon";
         String websocketport = "8100";
         String carbonport = "9444";
         String passthruonport = "8244";
-        String firstapipath = "/Users/apple/Documents/support/509_BNY_TESTING/wstestjar/createapi.json";
-        String secondapipath = "/Users/apple/Documents/support/509_BNY_TESTING/wstestjar/createapi2.json";
-        String corshandlerpath = "/Users/apple/Documents/support/509_BNY_TESTING/wstestjar/_cors_request_handler_.xml";*/
+        String firstapipath = "/Users/prabhash/Documents/support/516_TESTS/createapi.json";
+        String secondapipath = "/Users/prabhash/Documents/support/516_TESTS/createapi2.json";
+        String corshandlerpath = "/Users/prabhash/Documents/support/516_TESTS/_cors_request_handler_.xml";
 
         System.out.println(ANSI_YELLOW+"#### Starting websocket tests ######"+ANSI_RESET);
         HttpClient hc = new HttpClient(serverhome,storepassword);
@@ -163,7 +163,7 @@ public class WSTest {
         }
 
         SSLWebsocketServer ssws1 = new SSLWebsocketServer();
-        ssws1.run(serverhome,storepassword,keypassword,7777);
+        ssws1.run(serverhome,storepassword,keypassword,7778);
 
         System.out.println(ANSI_YELLOW+"#### Creating websocket API for CORS testing ######"+ANSI_RESET);
         pt.createAPI(secondapipath);
@@ -870,7 +870,6 @@ public class WSTest {
 
 
         System.out.println(ANSI_RED  +"######## All the test scenarios are completed, check the logs and verify ########" + ANSI_RESET);
-
 
     }
 }
