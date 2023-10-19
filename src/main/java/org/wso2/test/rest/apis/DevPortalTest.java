@@ -57,7 +57,7 @@ public class DevPortalTest {
         String basicToken = Base64.getEncoder().encodeToString("admin:admin".getBytes(StandardCharsets.UTF_8));
         HttpResponse response= client.invoke("POST", dcrPayload, dcrURL,null,basicToken);
         if(response.getStatusLine().getStatusCode()==200){
-            String tokenURL = "https://localhost:8244/token?grant_type=password&username=admin&password=admin&scope=apim:subscribe%20apim:api_key";
+            String tokenURL = "https://localhost:"+passthruonport+"/token?grant_type=password&username=admin&password=admin&scope=apim:subscribe%20apim:api_key";
             JsonObject responsejson = new JsonParser().parse(EntityUtils.toString(response.getEntity())).getAsJsonObject();
             String basict = responsejson.get("clientId").getAsString()+":"+responsejson.get("clientSecret").getAsString();
             HttpResponse tokenresponse= client.invoke("POST", null, tokenURL,null,Base64.getEncoder().encodeToString(basict.getBytes(StandardCharsets.UTF_8)));
@@ -229,7 +229,7 @@ public class DevPortalTest {
     }
 
     public void generateDefaultToken(){
-        String url  = "https://localhost:8244/token";
+        String url  = "https://localhost:"+passthruonport+"/token";
         HttpResponse generateDefaultTokenResponse= client.getToken(url, consumerKey, consumerSecret);
         if(generateDefaultTokenResponse.getStatusLine().getStatusCode()==200) {
             JsonObject responsejson = null;

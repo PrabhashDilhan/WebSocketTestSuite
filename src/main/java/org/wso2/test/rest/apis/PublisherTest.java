@@ -25,9 +25,12 @@ public class PublisherTest {
     
     String carbonport;
 
-    public PublisherTest(HttpClient client, String port) {
+    String passthruport;
+
+    public PublisherTest(HttpClient client, String port, String passthruport) {
         this.client=client;
         this.carbonport = port;
+        this.passthruport=passthruport;
         try {
             token=generateToken();
         } catch (IOException e) {
@@ -53,7 +56,7 @@ public class PublisherTest {
         String basicToken = Base64.getEncoder().encodeToString("admin:admin".getBytes(StandardCharsets.UTF_8));
         HttpResponse response= client.invoke("POST", dcrPayload, dcrURL,null,basicToken);
         if(response.getStatusLine().getStatusCode()==200){
-            String tokenURL = "https://localhost:8244/token?grant_type=password&username=admin&password=admin&scope=apim:api_view%20apim:api_create%20apim:api_delete%20apim:api_publish%20apim:subscription_view%20apim:subscription_block%20apim:external_services_discover%20apim:threat_protection_policy_create%20apim:threat_protection_policy_manage%20apim:document_create%20apim:document_manage%20apim:mediation_policy_view%20apim:mediation_policy_create%20apim:mediation_policy_manage%20apim:client_certificates_view%20apim:client_certificates_add%20apim:client_certificates_update%20apim:ep_certificates_view%20apim:ep_certificates_add%20apim:ep_certificates_update%20apim:publisher_settings%20apim:pub_alert_manage%20apim:shared_scope_manage%20apim:app_import_export%20apim:api_import_export%20apim:api_product_import_export";
+            String tokenURL = "https://localhost:"+passthruport+"/token?grant_type=password&username=admin&password=admin&scope=apim:api_view%20apim:api_create%20apim:api_delete%20apim:api_publish%20apim:subscription_view%20apim:subscription_block%20apim:external_services_discover%20apim:threat_protection_policy_create%20apim:threat_protection_policy_manage%20apim:document_create%20apim:document_manage%20apim:mediation_policy_view%20apim:mediation_policy_create%20apim:mediation_policy_manage%20apim:client_certificates_view%20apim:client_certificates_add%20apim:client_certificates_update%20apim:ep_certificates_view%20apim:ep_certificates_add%20apim:ep_certificates_update%20apim:publisher_settings%20apim:pub_alert_manage%20apim:shared_scope_manage%20apim:app_import_export%20apim:api_import_export%20apim:api_product_import_export";
             JsonObject responsejson = new JsonParser().parse(EntityUtils.toString(response.getEntity())).getAsJsonObject();
             String basict = responsejson.get("clientId").getAsString()+":"+responsejson.get("clientSecret").getAsString();
             HttpResponse tokenresponse= client.invoke("POST", null, tokenURL,null,Base64.getEncoder().encodeToString(basict.getBytes(StandardCharsets.UTF_8)));

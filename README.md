@@ -11,6 +11,7 @@
 <li>firstapipath:path-first-api-json</li>
 <li>secondapipath:path-seconnd-api-json</li>
 <li>corshandlerpath:path-to-_cors_request_handler_.xml</li>
+<li>scriptpath:path-to-python-websocket-servers-cript</li>
 </ul>
 
 ## First API <br />

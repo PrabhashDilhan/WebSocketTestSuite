@@ -5,6 +5,7 @@ import org.wso2.test.rest.apis.AdminTest;
 import org.wso2.test.rest.apis.DevPortalTest;
 import org.wso2.test.rest.apis.PublisherTest;
 import org.wso2.test.websocket.client.WebSocketChat;
+import org.wso2.test.websocket.server.PythonServer;
 import org.wso2.test.websocket.server.SSLWebsocketServer;
 
 import java.io.*;
@@ -22,7 +23,7 @@ public class WSTest {
 
     public static void main(String[] args){
         
-        /*String path = args[0];
+        String path = args[0];
         Properties prop = new Properties();
         File initialFile = new File(path);
         InputStream inputStream = null;
@@ -48,22 +49,25 @@ public class WSTest {
         String passthruonport = prop.getProperty("passthruonport");
         String firstapipath = prop.getProperty("firstapipath");
         String secondapipath = prop.getProperty("secondapipath");
-        String corshandlerpath = prop.getProperty("corshandlerpath");*/
+        String corshandlerpath = prop.getProperty("corshandlerpath");
+        String scriptpath = prop.getProperty("scriptpath");
 
-        String serverhome = "/Users/prabhash/Documents/support/516_TESTS/wso2am-3.2.0";
+
+        /*String serverhome = "/Users/prabhash/Documents/support/wso2am-3.2.0";
         String storepassword = "wso2carbon";
         String keypassword = "wso2carbon";
         String websocketport = "8100";
         String carbonport = "9444";
         String passthruonport = "8244";
-        String firstapipath = "/Users/prabhash/Documents/support/516_TESTS/createapi.json";
-        String secondapipath = "/Users/prabhash/Documents/support/516_TESTS/createapi2.json";
-        String corshandlerpath = "/Users/prabhash/Documents/support/516_TESTS/_cors_request_handler_.xml";
+        String firstapipath = "/Users/prabhash/Documents/support/api1.json";
+        String secondapipath = "/Users/prabhash/Documents/support/api2.json";
+        String corshandlerpath = "/Users/prabhash/Documents/support/_cors_request_handler_.xml";
+        String scriptpath = "/Users/prabhash/Documents/support/websocket.py";*/
 
         System.out.println(ANSI_YELLOW+"#### Starting websocket tests ######"+ANSI_RESET);
         HttpClient hc = new HttpClient(serverhome,storepassword);
-        PublisherTest pt = new PublisherTest(hc,carbonport);
-        AdminTest at = new AdminTest(hc,carbonport);
+        PublisherTest pt = new PublisherTest(hc,carbonport,passthruonport);
+        AdminTest at = new AdminTest(hc,carbonport,passthruonport);
         DevPortalTest dt = new DevPortalTest(hc,carbonport,passthruonport);
 
         System.out.println(ANSI_YELLOW+"#### Creating websocket API ######"+ANSI_RESET);
@@ -82,8 +86,8 @@ public class WSTest {
         System.out.println(ANSI_YELLOW+"#### Starting to invoke WS API and check the Application level throttling engagement ######"+ANSI_RESET);
         System.out.println(ANSI_YELLOW+"#### TEST : Starting websocket server"+ANSI_RESET);
 
-        SSLWebsocketServer ssws = new SSLWebsocketServer();
-        ssws.run(serverhome,storepassword,keypassword,7777);
+        PythonServer ssws = new PythonServer();
+        ssws.run(scriptpath);
         System.out.println(ANSI_YELLOW+"#### Sleeping for 10 sec"+ANSI_RESET);
         try {
             Thread.sleep(10000);
@@ -153,7 +157,7 @@ public class WSTest {
         dt.deleteSubscription(pt.getApiid());
         pt.deleteAPI();
 
-        ssws.stopChatServer();
+        //ssws.stopChatServer();
 
         System.out.println(ANSI_YELLOW+"#### Sleeping for 10sec ######"+ANSI_RESET);
         try {
@@ -162,8 +166,8 @@ public class WSTest {
             throw new WSTestException(e);
         }
 
-        SSLWebsocketServer ssws1 = new SSLWebsocketServer();
-        ssws1.run(serverhome,storepassword,keypassword,7778);
+        PythonServer ssws1 = new PythonServer();
+        ssws1.run(scriptpath);
 
         System.out.println(ANSI_YELLOW+"#### Creating websocket API for CORS testing ######"+ANSI_RESET);
         pt.createAPI(secondapipath);

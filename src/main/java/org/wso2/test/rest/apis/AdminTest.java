@@ -22,9 +22,12 @@ public class AdminTest {
     HttpClient client;
     String carbonport;
 
-    public AdminTest(HttpClient client, String port) {
+    String passthruport;
+
+    public AdminTest(HttpClient client, String port, String passthruport) {
         this.client=client;
         this.carbonport = port;
+        this.passthruport=passthruport;
         try {
             token=generateToken();
         } catch (IOException e) {
@@ -50,7 +53,7 @@ public class AdminTest {
         String basicToken = Base64.getEncoder().encodeToString("admin:admin".getBytes(StandardCharsets.UTF_8));
         HttpResponse response= client.invoke("POST", dcrPayload, dcrURL,null,basicToken);
         if(response.getStatusLine().getStatusCode()==200){
-            String tokenURL = "https://localhost:8244/token?grant_type=password&username=admin&password=admin&scope=apim:admin%20apim:tier_view";
+            String tokenURL = "https://localhost:"+passthruport+"/token?grant_type=password&username=admin&password=admin&scope=apim:admin%20apim:tier_view";
             JsonObject responsejson = new JsonParser().parse(EntityUtils.toString(response.getEntity())).getAsJsonObject();
             String basict = responsejson.get("clientId").getAsString()+":"+responsejson.get("clientSecret").getAsString();
             HttpResponse tokenresponse= client.invoke("POST", null, tokenURL,null,Base64.getEncoder().encodeToString(basict.getBytes(StandardCharsets.UTF_8)));
