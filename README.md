@@ -24,9 +24,9 @@
   "endpointConfig":{
     "endpoint_type":"http",
     "sandbox_endpoints":{
-      "url":"wss://localhost:7777"},
+      "url":"ws://localhost:7777"},
     "production_endpoints":{
-      "url":"wss://localhost:7777"}
+      "url":"ws://localhost:7777"}
   },
   "gatewayEnvironments":["Production and Sandbox"],
   "type":"WS"
@@ -44,9 +44,9 @@
   "endpointConfig":{
     "endpoint_type":"http",
     "sandbox_endpoints":{
-      "url":"wss://localhost:7778"},
+      "url":"ws://localhost:7777"},
     "production_endpoints":{
-      "url":"wss://localhost:7778"}
+      "url":"ws://localhost:7777"}
   },
   "gatewayEnvironments":["Production and Sandbox"],
   "type":"WS"
@@ -85,6 +85,24 @@
         </default>
     </switch>
 </sequence>
+
+```
+
+## websocket.py <br />
+
+```js
+
+import asyncio
+import websockets
+
+async def handle_connection(websocket, path):
+    async for message in websocket:
+        await websocket.send("Received: " + message)
+
+start_server = websockets.serve(handle_connection, "localhost", 7777)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
 
 ```
 
