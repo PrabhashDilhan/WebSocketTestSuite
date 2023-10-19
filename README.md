@@ -105,6 +105,7 @@ asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
 
 ```
+## if the required python packages are not installed, you need to install those. before running the test, let's verify whether the python server can be run with python3 websocket.py <br />
 
 ## How to run the client <br />
 **java -jar WSTesting-1.0-jar-with-dependencies.jar path-to-config.properties-file**
