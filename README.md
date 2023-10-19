@@ -105,7 +105,9 @@ asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
 
 ```
-## if the required python packages are not installed, you need to install those. before running the test, let's verify whether the python server can be run with python3 websocket.py <br />
+if the required python packages are not installed, you need to install those. before running the test, let's verify whether the python server can be run with python3 websocket.py <br />
 
 ## How to run the client <br />
 **java -jar WSTesting-1.0-jar-with-dependencies.jar path-to-config.properties-file**
+
+if you need to run the test cases again, make sure to delete all the created APIs, applications, and throttling policies. And also, make sure to revert the change in _cors_request_handler_.xml <br />
