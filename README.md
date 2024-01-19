@@ -15,8 +15,8 @@
 </ul>
 
 ## Add the following config to the deployment.toml <br />
-```yaml
 
+```yaml
 [apim.cors]
 enable = true
 allow_headers = ["authorization","Access-Control-Allow-Origin","",""]
@@ -24,6 +24,8 @@ allow_headers = ["authorization","Access-Control-Allow-Origin","",""]
 enable_validation_for_ws = true
 # Enable/disable engaging the CORS mediation sequence for WebSocket endpoints
 enable_ws_additional_cors_validation = true
+
+```
 
 
 ## First API <br />
