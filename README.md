@@ -14,6 +14,16 @@
 <li>scriptpath:path-to-python-websocket-servers-cript</li>
 </ul>
 
+## Add the following config to the deployment.toml <br />
+[apim.cors]
+enable = true
+allow_headers = ["authorization","Access-Control-Allow-Origin","",""]
+# Enable/disable CORS validation for WebSocket endpoints
+enable_validation_for_ws = true
+# Enable/disable engaging the CORS mediation sequence for WebSocket endpoints
+enable_ws_additional_cors_validation = true
+
+
 ## First API <br />
 ```json
 
