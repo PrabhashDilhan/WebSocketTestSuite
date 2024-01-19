@@ -15,6 +15,8 @@
 </ul>
 
 ## Add the following config to the deployment.toml <br />
+```yaml
+
 [apim.cors]
 enable = true
 allow_headers = ["authorization","Access-Control-Allow-Origin","",""]
